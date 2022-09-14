@@ -1,0 +1,3 @@
+Node utiliza una API a la que le manda las funciones como las de "app3.js".
+Cuando la función con segundos de retardo se ejecuta pasa a la API y luego a la cola donde espera a que node acabe de ejecutar lo que le falte.
+Por este motivo salen en ese orden los "console.log();"
