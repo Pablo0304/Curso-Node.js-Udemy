@@ -1,6 +1,6 @@
+//   node app -b 2 -l --hasta=2
 const{ crearArchivo } = require('./helpers/multiplicar');
-
-
+const colors = require('colors');   // colores de printeo, leer documentación de "colors" en npm
 
 
 
@@ -44,7 +44,7 @@ console.clear();
 }).argv; */
 
 const argv = require('./config/yargs');
-crearArchivo(argv.b, argv.l).then(nombreArchivo => console.log(nombreArchivo, 'creado')).catch(err => console.log(err));
+crearArchivo(argv.b, argv.l, argv.hasta).then(nombreArchivo => console.log(nombreArchivo.red, colors.green('creado'.trap))).catch(err => console.log(err));
 
 //console.log(process.argv);
 //console.log(argv);

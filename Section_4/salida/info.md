@@ -1,0 +1,1 @@
+Aquí debería ir información sobre por qué esta carpeta está vacía, pero no es así no hay gitignore.
