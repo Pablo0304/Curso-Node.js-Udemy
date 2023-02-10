@@ -52,6 +52,18 @@ const inquirerMenu = async() => {
 
 }
 
-pausa
+const pausa = async() => {
+
+    const enter = [
+        {
+            type: 'input',
+            name: 'enter',
+            message: `Presione ${ 'ENTER'.green } para continuar...`
+        }
+    ]
+    console.log('\n'); // para que no esté todo pegado
+    await inquirer.prompt(enter);
+
+}
 
 module.exports = { inquirerMenu, pausa }

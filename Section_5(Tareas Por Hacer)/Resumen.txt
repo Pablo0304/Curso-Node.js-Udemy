@@ -1,0 +1,2 @@
+-Se usa la una lista mediante promesas que posteriormente se acaba cambiando por el uso de la librería "inquirer".
+-En la clase inquirer he desarrollado dos métodos, "inquirerMenu" y "pausa" que se usan para mostrar la lista.
