@@ -1,29 +1,56 @@
 //  la versión 9 de inquirer ahora requiere el uso de módulos de ECMAScript, por eso gasto la versión 8.1.2
 require('colors');
 
+const { guardarDB, leerDB } = require('./helpers/guardarArchivo');
 // const { mostrarMenu, pausa } = require('./helpers/mensajes');
-const { inquirerMenu, pausa } = require('./helpers/inquirer');
-const Tarea = require('./models/tarea');
+const { inquirerMenu, pausa, leerInput } = require('./helpers/inquirer');
 const Tareas = require('./models/tareas');
-
-console.clear();
 
 const main = async() => {
 
     let opt = '';
 
-    console.clear();
+    const tareas = new Tareas();
+
+    const tareasDB = leerDB();
+
+    if( tareasDB ) {  // establecer tareas
+        
+    }
 
     do{
-        // opt = await mostrarMenu();
-        opt = await inquirerMenu();
+        // opt = await mostrarMenu();  // imprimir menú
+        opt = await inquirerMenu();  // imprimir menú
 
-        const tareas = new Tareas();
+        switch (opt) {
+            case '1':
+                // crear opción
+                const desc = await leerInput('Descripción:');
+                tareas.crearTarea(desc);
+            break;
 
-        const tarea = new Tarea('Comprar comida');
+            case '2':
+                console.log(tareas._listado);
+            break;
 
-        tareas._listado[tarea.id] = tarea;
-        console.log(tareas);
+            case '3':
+                
+            break;
+
+            case '4':
+                
+            break;
+
+            case '5':
+                
+            break;
+
+            case '6':
+                
+            break;
+        }
+
+        //guardarDB( tareas.listadoArr );
 
         //if(opt!=='0') await pausa();
         await pausa();
