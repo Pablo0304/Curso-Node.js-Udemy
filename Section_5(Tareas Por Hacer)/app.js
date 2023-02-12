@@ -24,29 +24,34 @@ const main = async() => {
 
         switch (opt) {
             case '1':
-                // crear opción
+                // crear tarea
                 const desc = await leerInput('Descripción:');
                 tareas.crearTarea(desc);
             break;
-
+            
             case '2':
+                // mostrar tareas
                 console.log(tareas._listado);
             break;
 
             case '3':
-                
+                // listar tareas completadas
+
             break;
 
             case '4':
-                
+                // listar tareas pendientes
+
             break;
 
             case '5':
-                
+                // completar tarea(s)
+
             break;
 
             case '6':
-                
+                // borrar tarea(s)
+
             break;
         }
 

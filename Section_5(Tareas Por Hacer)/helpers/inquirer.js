@@ -29,7 +29,7 @@ const preguntas = [
             },
             {
                 value: '6',
-                name: `${ '6.'.yellow } Borrar tarea`
+                name: `${ '6.'.yellow } Borrar tarea(s)`
             },
             {
                 value: '0',
