@@ -6,7 +6,7 @@ const { guardarDB, leerDB } = require('./helpers/guardarArchivo');
 const { inquirerMenu, pausa, leerInput } = require('./helpers/inquirer');
 const Tareas = require('./models/tareas');
 
-const main = async() => {
+const main = async () => {
 
     let opt = '';
 
@@ -14,11 +14,11 @@ const main = async() => {
 
     const tareasDB = leerDB();
 
-    if( tareasDB ) {  // establecer tareas
-        
+    if (tareasDB) {  // establecer tareas
+        tareas.cargarTareasFromArray(tareasDB);
     }
 
-    do{
+    do {
         // opt = await mostrarMenu();  // imprimir menú
         opt = await inquirerMenu();  // imprimir menú
 
@@ -26,40 +26,48 @@ const main = async() => {
             case '1':
                 // crear tarea
                 const desc = await leerInput('Descripción:');
-                tareas.crearTarea(desc);
-            break;
-            
+                var compl;
+                do {
+                    compl = await leerInput('Estado(Completada | Pendiente | Abortar):');
+                } while (compl != 'Completada' && compl != 'Pendiente' && compl != 'Abortar')
+
+                if (compl != 'Abortar') {
+                    tareas.crearTarea(desc, compl);
+                }
+
+                break;
+
             case '2':
                 // mostrar tareas
-                console.log(tareas._listado);
-            break;
+                tareas.listadoCompleto();
+                break;
 
             case '3':
                 // listar tareas completadas
 
-            break;
+                break;
 
             case '4':
                 // listar tareas pendientes
 
-            break;
+                break;
 
             case '5':
                 // completar tarea(s)
 
-            break;
+                break;
 
             case '6':
                 // borrar tarea(s)
 
-            break;
+                break;
         }
 
-        //guardarDB( tareas.listadoArr );
+        guardarDB(tareas.listadoArr);
 
         //if(opt!=='0') await pausa();
         await pausa();
-    }while(opt!=='0')
+    } while (opt !== '0')
 
     //pausa();
 }

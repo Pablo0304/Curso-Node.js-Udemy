@@ -1,6 +1,21 @@
 const inquirer = require('inquirer');
 require('colors');
 
+
+
+const inquirerMenu = async() => {
+
+    console.clear();
+    console.log('============================'.green);
+    console.log(`   Seleccione una opción:   `.white);
+    console.log('============================\n'.green);
+
+    const { opcion } = await inquirer.prompt(preguntas);
+
+    return opcion;
+
+}
+
 const preguntas = [
     {
         type: 'list',
@@ -39,19 +54,6 @@ const preguntas = [
     }
 ]
 
-const inquirerMenu = async() => {
-
-    console.clear();
-    console.log('============================'.green);
-    console.log(`   Seleccione una opción:   `.white);
-    console.log('============================\n'.green);
-
-    const { opcion } = await inquirer.prompt(preguntas);
-
-    return opcion;
-
-}
-
 const pausa = async() => {
 
     const enter = [
@@ -71,7 +73,7 @@ const leerInput = async( mensaje ) => {
     const question = [
         {
             type: 'input',
-            name: 'desc',
+            name: 'res',
             message: mensaje,
             validate( value ) {  // para validar que el existe mensaje, esto es propio de la documentación de "inquirer"
                 if(value.length === 0){
@@ -82,8 +84,8 @@ const leerInput = async( mensaje ) => {
         }
     ];
 
-    const { desc } = await inquirer.prompt(question);
-    return desc;
+    const { res } = await inquirer.prompt(question);
+    return res;
 
 }
 
