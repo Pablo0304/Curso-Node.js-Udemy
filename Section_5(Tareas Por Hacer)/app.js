@@ -3,7 +3,7 @@ require('colors');
 
 const { guardarDB, leerDB } = require('./helpers/guardarArchivo');
 // const { mostrarMenu, pausa } = require('./helpers/mensajes');
-const { inquirerMenu, pausa, leerInput } = require('./helpers/inquirer');
+const { inquirerMenu, pausa, leerInput, listadoBorrarTareas, confirmar } = require('./helpers/inquirer');
 const Tareas = require('./models/tareas');
 
 const main = async () => {
@@ -27,12 +27,18 @@ const main = async () => {
                 // crear tarea
                 const desc = await leerInput('Descripción:');
                 var compl;
+                var complEn = null;
                 do {
                     compl = await leerInput('Estado(Completada | Pendiente | Abortar):');
                 } while (compl != 'Completada' && compl != 'Pendiente' && compl != 'Abortar')
 
+                if (compl == 'Completada') {
+                    let now = new Date();
+                    complEn = now.toLocaleString();
+                }
+
                 if (compl != 'Abortar') {
-                    tareas.crearTarea(desc, compl);
+                    tareas.crearTarea(desc, compl, complEn);
                 }
 
                 break;
@@ -44,12 +50,12 @@ const main = async () => {
 
             case '3':
                 // listar tareas completadas
-
+                tareas.listarPendientesCompletadas(true);
                 break;
 
             case '4':
                 // listar tareas pendientes
-
+                tareas.listarPendientesCompletadas(false);
                 break;
 
             case '5':
@@ -59,7 +65,15 @@ const main = async () => {
 
             case '6':
                 // borrar tarea(s)
-
+                const id =  await listadoBorrarTareas(tareas.listadoArr);
+                if(id != 0){
+                    const ok = await confirmar('¿Está seguro de que quiere eliminar la tarea?');
+                    
+                    if(ok){
+                        tareas.borrarTarea(id);
+                        console.log(`La tarea con ID "${id.green}" se borró con éxito :)`);
+                    }else{console.log('No se borró la tarea :)');}
+                }
                 break;
         }
 
