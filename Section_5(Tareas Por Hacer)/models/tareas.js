@@ -68,7 +68,7 @@ class Tareas {
                     res += `${cont++}.`.green + ` ${tarea.desc}`.magenta + ' :: ';
                     res += `Completada (${tarea.completadoEn}) \n`.green;
                 }
-            })
+            });
         } else {
             data.forEach(tarea => {
                 if (tarea.completado == 'Pendiente') {
@@ -87,6 +87,23 @@ class Tareas {
         if (this._listado[id]) {
             delete this._listado[id];
         }
+    }
+
+    toggleCompletadas(ids = []) {
+        ids.forEach(id => {
+            let tarea = this._listado[id];
+            if (!tarea.completadoEn) {
+                tarea.completado = 'Completada';
+                tarea.completadoEn = new Date().toLocaleString();
+            }
+        });
+
+        this.listadoArr.forEach(tarea => {
+            if (!ids.includes(tarea.id)) {
+                tarea.completado = 'Pendiente';
+                tarea.completadoEn = null;
+            }
+        })
     }
 
 }

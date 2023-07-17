@@ -1,9 +1,9 @@
-//  la versión 9 de inquirer ahora requiere el uso de módulos de ECMAScript, por eso gasto la versión 8.1.2
+//  La versión 9 de inquirer ahora requiere el uso de módulos de ECMAScript, por eso gasto la versión 8.1.2
 require('colors');
 
 const { guardarDB, leerDB } = require('./helpers/guardarArchivo');
 // const { mostrarMenu, pausa } = require('./helpers/mensajes');
-const { inquirerMenu, pausa, leerInput, listadoBorrarTareas, confirmar } = require('./helpers/inquirer');
+const { inquirerMenu, pausa, leerInput, listadoBorrarTareas, confirmar, mostrarListadoChecklist } = require('./helpers/inquirer');
 const Tareas = require('./models/tareas');
 
 const main = async () => {
@@ -60,19 +60,20 @@ const main = async () => {
 
             case '5':
                 // completar tarea(s)
-
+                const ids = await mostrarListadoChecklist(tareas.listadoArr);
+                tareas.toggleCompletadas(ids);
                 break;
 
             case '6':
                 // borrar tarea(s)
-                const id =  await listadoBorrarTareas(tareas.listadoArr);
-                if(id != 0){
+                const id = await listadoBorrarTareas(tareas.listadoArr);
+                if (id != 0) {
                     const ok = await confirmar('¿Está seguro de que quiere eliminar la tarea?');
-                    
-                    if(ok){
+
+                    if (ok) {
                         tareas.borrarTarea(id);
                         console.log(`La tarea con ID "${id.green}" se borró con éxito :)`);
-                    }else{console.log('No se borró la tarea :)');}
+                    } else { console.log('No se borró la tarea :)'); }
                 }
                 break;
         }

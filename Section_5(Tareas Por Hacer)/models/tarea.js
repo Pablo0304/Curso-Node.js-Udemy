@@ -22,17 +22,17 @@ class Tarea {
     }
 
     cambiaFormatoFecha(complEn) {
-        const [date, time] = complEn.split(", ");
+        if (complEn != null) {
+            const [date, time] = complEn.split(", ");
 
-        // Dividir los componentes de la fecha
-        const [day, month, year] = date.split("/");
+            // Dividir los componentes de la fecha
+            const [day, month, year] = date.split("/");
 
-        // Formatear el nuevo formato de fecha y hora
-        complEn = `${time.substr(0, 5)} ${day.padStart(2, "0")}/${month.padStart(2, "0")}/${year}`;
-
+            // Formatear el nuevo formato de fecha y hora
+            complEn = `${time.substr(0, 5)} ${day.padStart(2, "0")}/${month.padStart(2, "0")}/${year}`;
+        }
         return complEn;
     }
 
 }
-
 module.exports = Tarea;

@@ -40,7 +40,7 @@ const preguntas = [
             },
             {
                 value: '5',
-                name: `${'5.'.yellow} Crear tarea(s)`
+                name: `${'5.'.yellow} Completar tarea(s)`
             },
             {
                 value: '6',
@@ -98,7 +98,7 @@ const listadoBorrarTareas = async (tareas, i = []) => {
             value: tarea.id,
             name: `${idx} ${tarea.desc}`
         }
-    })
+    });
 
     //   Con "unshift" se pone al principio del todo
     choices.unshift({
@@ -113,7 +113,7 @@ const listadoBorrarTareas = async (tareas, i = []) => {
             message: 'Borrar:',
             choices
         }
-    ]
+    ];
     const { id } = await inquirer.prompt(preguntas);
     return id;
 }
@@ -131,5 +131,28 @@ const confirmar = async (mensaje) => {
     return ok;
 };
 
+const mostrarListadoChecklist = async (tareas, i = []) => {
+    const choices = tareas.map((tarea, i) => {
 
-module.exports = { inquirerMenu, pausa, leerInput, listadoBorrarTareas, confirmar }
+        const idx = `${i + 1}.`.green;
+
+        return {
+            value: tarea.id,
+            name: `${idx} ${tarea.desc}`,
+            checked: (tarea.completadoEn) ? true : false
+        }
+    });
+
+    const preguntas = [
+        {
+            type: 'checkbox',
+            name: 'ids',
+            message: 'Seleccione:',
+            choices
+        }
+    ];
+    const { ids } = await inquirer.prompt(preguntas);
+    return ids;
+}
+
+module.exports = { inquirerMenu, pausa, leerInput, listadoBorrarTareas, confirmar, mostrarListadoChecklist }
