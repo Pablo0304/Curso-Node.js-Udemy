@@ -1,14 +1,19 @@
-const http = require('http');
+const express = require('express');
+const app = express();
 
-const puerto = 8080;
+const port = 8080;
 
-http.createServer((req, res) => {
+// Servir contenido estático('/'):   <= Tiene prioridad, luego las "app.get(...)"
+app.use(express.static('public'));
 
-    console.log(req);
+app.get('/yep', (req, res) => {   // Si el path es "/yep"
+    res.send('Hola desde "/yep"!');
+});
 
-    res.write('Hola mundo');
-    res.end();   // Con esto no se mantiene en espera al cliente
+app.get('*', (req, res) => {
+    res.sendFile(__dirname + '/public/404.html');   // Para mandar un archivo HTML
+                                                    // __dirname pilla el path donde está instalado todo
+});
 
-}).listen(puerto);
-
-console.log(`Escuchando en el puerto ${puerto}...`);
+app.listen(port);
+console.log(`Escuchando en el puerto ${port}...`);
