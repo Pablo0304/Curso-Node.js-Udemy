@@ -10,9 +10,22 @@ app.get('/yep', (req, res) => {   // Si el path es "/yep"
     res.send('Hola desde "/yep"!');
 });
 
+app.get('/', (req, res) => {   // Si el path es "/yep"
+    res.sendFile(__dirname + '/public/index.html');
+});
+
+app.get('/elements', (req, res) => {   // Si el path es "/yep"
+    res.sendFile(__dirname + '/public/elements.html');
+});
+
+app.get('/generic', (req, res) => {   // Si el path es "/yep"
+    res.sendFile(__dirname + '/public/generic.html');
+});
+
 app.get('*', (req, res) => {
-    res.sendFile(__dirname + '/public/404.html');   // Para mandar un archivo HTML
-                                                    // __dirname pilla el path donde está instalado todo
+    res.sendFile(__dirname + '/PRUEBA/404.html');   // Para mandar un archivo HTML
+                                                           // __dirname pilla el path donde está instalado todo
+                                                           // No funciona el css, creo que es por la web hosteada
 });
 
 app.listen(port);
