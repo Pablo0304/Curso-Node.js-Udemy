@@ -1,8 +1,9 @@
 const express = require('express');
 const app = express();
 const hbs = require('hbs');
+require('dotenv').config();
 
-const port = 8080;
+const port = process.env.PORT;
 
 // Handlebars
 app.set('view engine', 'hbs');
