@@ -1,2 +1,12 @@
 # HOSTING:
 * Con https://railway.app/ se puede desplegar gratis.
+
+# HOSTING PARA TESTS RÁPIDOS(PRE):
+1.- Comando de instalación:
+  ```console
+npm i --g http-server
+  ```
+  2.- Luego en el directorio donde se encuentre:
+  ```console
+http-server -o
+  ```
