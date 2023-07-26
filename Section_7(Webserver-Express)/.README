@@ -1,5 +1,6 @@
 # HOSTING:
 * Con https://railway.app/ se puede desplegar gratis.
+* Otra opción es utilizar HEROKU pero no lo he probado.
 
 # HOSTING PARA TESTS RÁPIDOS(PRE):
 1.- Comando de instalación:
